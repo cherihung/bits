@@ -19,6 +19,7 @@ fs.readdir(testDir, (err, files) => {
  runTests(availableTests)
 })
 
+// loop thru test file paths and execute
 function runTests(testPaths) {
   for(let test of testPaths) {
     let currentTest = require(test);
@@ -31,54 +32,22 @@ function runTests(testPaths) {
     console.log(String(event.target));
   })
   .on('complete', function() {
+    const fastestByIds = this.filter('fastest').map('id');
     let output = [];
     this.map((item) => {
+      let isFastest = fastestByIds.includes(item.id);
       output.push({
+        isFastest,
         name: item.name, 
         opsSec: item.hz, 
         errMargin: item.stats.rme, 
         runs: item.stats.sample.length})
     })
-    outputToJson(output, () => {
-      console.log('output file written')
+    outputToJson(output, (fileName) => {
+      console.log(`result file ${fileName} written`)
     });
     console.log('Fastest is ' + this.filter('fastest').map('name'));
   })
   // run async
   .run({ 'async': true });
 }
-// const suiteA = require('./suiteA');
-// const suiteB = require('./suiteB');
-// const suiteC  = require('./suiteC');
-
-
-// // add tests
-// suite.add('WithPromiseChunk', function() {
-//   suiteA();
-// })
-// .add('WithAsyncGenerator', function() {
-//   suiteB();
-// })
-// .add('WithGeneratorTracker', function() {
-//   suiteC();
-// })
-// // add listeners
-// .on('cycle', function(event) {
-//   console.log(String(event.target));
-// })
-// .on('complete', function() {
-//   let output = [];
-//   this.map((item) => {
-//     output.push({
-//       name: item.name, 
-//       opsSec: item.hz, 
-//       errMargin: item.stats.rme, 
-//       runs: item.stats.sample.length})
-//   })
-//   outputToJson(output, () => {
-//     console.log('output file written')
-//   });
-//   console.log('Fastest is ' + this.filter('fastest').map('name'));
-// })
-// // run async
-// .run({ 'async': true });
