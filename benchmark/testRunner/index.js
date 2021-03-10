@@ -5,7 +5,8 @@ const outputToJson = require('./outputHandler');
 const suite = new Benchmark.Suite;
 
 // read files from /suites directory
-const testDir = path.join(__dirname, 'suites');
+const testDir = path.join(__dirname, '..', 'suites');
+
 fs.readdir(testDir, (err, files) => {
   let availableTests = [];
  if(err) {
