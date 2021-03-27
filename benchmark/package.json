@@ -1,9 +1,9 @@
 {
-  "name": "perf_test",
+  "name": "benchmark_test_suites",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "private":"true",
+  "private": "true",
   "scripts": {
     "run-suites": "node testRunner/index.js"
   },

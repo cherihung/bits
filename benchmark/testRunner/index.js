@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const Benchmark = require('benchmark');
 const outputToJson = require('./outputHandler');
+const currentTitle = require('../suites/setups').title;
 const suite = new Benchmark.Suite;
 
 // read files from /suites directory
@@ -33,11 +34,19 @@ function runTests(testPaths) {
     console.log(String(event.target));
   })
   .on('complete', function() {
+    const dateNow = new Date().valueOf();
     const fastestByIds = this.filter('fastest').map('id');
-    let output = [];
+    let output = {
+      metaData: {
+        timeStamp: dateNow,
+        numOfTests: this.length,
+        title: currentTitle,
+      },
+      results: []
+    }
     this.map((item) => {
       let isFastest = fastestByIds.includes(item.id);
-      output.push({
+      output.results.push({
         isFastest,
         name: item.name, 
         opsSec: item.hz, 
