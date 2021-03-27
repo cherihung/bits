@@ -18,7 +18,7 @@ function App() {
       <div className="text-xl mb-5">Benchmark</div>
       {metaData && (
         <>
-          <h1 className="text-3xl font-bold">{metaData.title}</h1>
+          <h1 className="text-3xl font-bold pb-2">{metaData.title}</h1>
           <div>
             Date Run:{' '}
             <span className="text-indigo-600">
@@ -29,8 +29,13 @@ function App() {
       )}
       {resultsData && (
         <>
-          <div className="text-xl mt-6 font-bold">Results</div>
-          <div className="grid grid-flow-row grid-cols-3 grid-rows-1 mt-3 divide-x-2">
+          <div className="text-xl mt-6 font-bold">
+            Results:{' '}
+            <button className="button" type="button">
+              Download JSON
+            </button>
+          </div>
+          <div className="grid grid-flow-row gap-4 grid-cols-3 mt-3">
             {resultsData.map((item) => (
               <ResultBlock item={item} key={item.name} />
             ))}

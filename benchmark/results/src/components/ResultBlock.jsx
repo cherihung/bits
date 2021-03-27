@@ -15,7 +15,10 @@ function ResultBlock({ item }) {
   }, [containerRef, item]);
 
   return (
-    <div className="px-4" ref={containerRef}>
+    <div
+      className={item.isFastest ? 'p-2 border-yellow-200 border-2' : 'p-2'}
+      ref={containerRef}
+    >
       <div>
         Case: <strong>{item.name}</strong> {item.isFastest && <span>🏆</span>}
       </div>
@@ -23,7 +26,7 @@ function ResultBlock({ item }) {
         Single Duration (sec):{' '}
         <span className="text-green-600 font-bold">{item.timeToOnce}</span>
       </div>
-      <div className="h-9 bg-green-100 mt-2 mb-4">
+      <div className="h-9 bg-gray-200 mt-2 mb-4">
         <div
           className="h-full bg-green-600"
           style={{ width: `${barWidth}%` }}
