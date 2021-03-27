@@ -5,7 +5,8 @@
   "main": "index.js",
   "private": "true",
   "scripts": {
-    "run-suites": "node testRunner/index.js"
+    "run-test": "node testRunner/index.js",
+    "show-result": "cd results && yarn start"
   },
   "author": "",
   "license": "ISC",

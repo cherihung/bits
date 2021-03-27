@@ -49,7 +49,8 @@ function runTests(testPaths) {
       output.results.push({
         isFastest,
         name: item.name, 
-        opsSec: item.hz, 
+        opsSec: item.hz,
+        timeToOnce: item.times.period, 
         errMargin: item.stats.rme, 
         runs: item.stats.sample.length})
     })
