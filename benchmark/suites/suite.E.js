@@ -1,6 +1,5 @@
 
 const processItem = require('./setups').processItem;
-const names = require('./setups').names;
 
 var globalQueue = [];
 
@@ -24,7 +23,7 @@ const populateQueueSome = async(data) => {
  return result;
 }
 
-async function mainWithProgress() {
+async function mainWithProgress({names}) {
   const concurrency = 20;
   let currentCount = 0;
   for(let i = 0; i < names.length; i+=concurrency) {

@@ -43,10 +43,12 @@ function App() {
           </div>
           <div className="text-xl mt-6 mb-2 font-bold">
             <button className="button" type="button" onClick={toggleResult}>
-              {!showResult ? 'Show Result JSON' : 'Hide Result JSON'}
+              {!showResult ? 'Show' : 'Hide'} Full Result
             </button>
           </div>
-          {showResult && <ReactJson src={data} displayDataTypes={false} />}
+          {showResult && (
+            <ReactJson src={data} displayDataTypes={false} collapsed={3} />
+          )}
         </>
       )}
     </div>

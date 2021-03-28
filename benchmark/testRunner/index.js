@@ -2,7 +2,9 @@ const path = require('path');
 const fs = require('fs');
 const Benchmark = require('benchmark');
 const outputToJson = require('./outputHandler');
-const currentTitle = require('../suites/setups').title;
+const setUps = require('../suites/setups');
+
+const currentTitle = setUps.TEST_TITLE;
 const suite = new Benchmark.Suite;
 
 // read files from /suites directory
@@ -25,8 +27,13 @@ fs.readdir(testDir, (err, files) => {
 function runTests(testPaths) {
   for(let test of testPaths) {
     let currentTest = require(test);
-    suite.add(currentTest.name, function() {
-      currentTest.executor();
+    suite.add(currentTest.name, {
+      fn: function() {
+        // pass in any static test data to the executor
+        currentTest.executor(setUps.TEST_DATA);
+      },
+      setup: function() {},
+      teardown: function() {}
     })
   }
   // add listeners

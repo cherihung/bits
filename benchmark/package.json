@@ -8,7 +8,7 @@
     "run-test": "node testRunner/index.js",
     "show-result": "cd results && yarn start"
   },
-  "author": "",
+  "author": "Cheri Hung cyh.io",
   "license": "ISC",
   "dependencies": {
     "benchmark": "^2.1.4",

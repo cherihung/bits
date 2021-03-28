@@ -1,5 +1,4 @@
 const processItem = require('./setups').processItem;
-const names = require('./setups').names;
 
 var globalQueue = [];
 
@@ -30,13 +29,13 @@ async function* populateQueueEachWithProgress(data) {
 //   // finally, output
 //   console.log(globalQueue.length)
 // }
-async function mainWithProgressGenerator() {
+async function mainWithProgressGenerator({names}) {
   const concurrency = 20;
   let currentCount = 0;
   for(let i = 0; i < names.length; i+=concurrency) {
     for await(const chunkCount of populateQueueEachWithProgress(names.slice(i, i+concurrency))) {
       currentCount = currentCount + chunkCount;
-      //console.log(`Progress: ${currentCount}/${names.length} added to queue.`)
+      // console.log(`Progress: ${currentCount}/${names.length} added to queue.`)
       // logDB2.push(`Progress: ${currentCount}/${names.length} added to queue.`)
     }
   }
@@ -50,5 +49,5 @@ async function mainWithProgressGenerator() {
 
 module.exports = {
   executor: mainWithProgressGenerator,
-  name: 'WithAsyncGenerator'
+  name: 'WithAsyncGenerator',
 };

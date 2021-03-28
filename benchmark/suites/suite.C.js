@@ -1,5 +1,4 @@
 const processItem = require('./setups').processItem;
-const names = require('./setups').names;
 
 var globalQueue = [];
 
@@ -27,7 +26,7 @@ async function populateQueueEach(data) {
    })
 }
 
-async function mainWithProgressSeparate() {
+async function mainWithProgressSeparate({names}) {
   await populateQueueEach(names);
   // finally, output
   //console.log(globalQueue.length)
