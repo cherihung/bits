@@ -1,12 +1,19 @@
 import React from 'react';
+import ReactJson from 'react-json-view';
+
 import data from '../data';
 import ResultBlock from './ResultBlock';
 
 function App() {
   const [resultsData, setResultsData] = React.useState(null);
   const [metaData, setMetaData] = React.useState(null);
+  const [showResult, setShowResult] = React.useState(false);
   const getDate = (date) => new Date(date).toISOString();
   const sortBySpeed = (arr) => arr.sort((a, b) => b.opsSec - a.opsSec);
+
+  const toggleResult = () => {
+    setShowResult(!showResult);
+  };
 
   React.useEffect(() => {
     setResultsData(sortBySpeed(data.results));
@@ -29,17 +36,17 @@ function App() {
       )}
       {resultsData && (
         <>
-          <div className="text-xl mt-6 font-bold">
-            Results:{' '}
-            <button className="button" type="button">
-              Download JSON
-            </button>
-          </div>
           <div className="grid grid-flow-row gap-4 grid-cols-3 mt-3">
             {resultsData.map((item) => (
               <ResultBlock item={item} key={item.name} />
             ))}
           </div>
+          <div className="text-xl mt-6 mb-2 font-bold">
+            <button className="button" type="button" onClick={toggleResult}>
+              {!showResult ? 'Show Result JSON' : 'Hide Result JSON'}
+            </button>
+          </div>
+          {showResult && <ReactJson src={data} displayDataTypes={false} />}
         </>
       )}
     </div>

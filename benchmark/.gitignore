@@ -1,1 +1,4 @@
-results/json/*.json
+results/src/data/*.json
+.snowpack
+build
+node_modules
